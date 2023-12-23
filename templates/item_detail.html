@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ item.name }}</title>
+    <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+    <a href="{% url 'items_show' %}">Товары</a>
+    <h1>{{ item.name }}</h1>
+    <p>{{ item.description }}</p>
+    <p>Price: ${{ item.price }}</p>
+    <button id="checkout-button">Купить</button>
+    <p></p>
+    <form method="post" action="{% url 'add_item_to_order' item.id %}">
+        <input type="submit" class="btn btn-primary" value="Добавить в корзину">
+    </form>
+    <form method="post" action="{% url 'remove_item_from_order' item.id %}">
+        <input type="submit" class="btn btn-primary" value="Удалить из корзины">
+    </form>
+    <p></p>
+    <form action="{% url 'order_detail' %}">
+        <input type="submit" value="Корзина" />
+    </form>
+    
+    <script>
+        var stripe = Stripe('{{ stripe_publishable_key }}');
+        var checkoutButton = document.getElementById('checkout-button');
+
+        checkoutButton.addEventListener('click', function () {
+            fetch('/buy/{{ item.id }}/')
+                .then(response => response.json())
+                .then(session => {
+                    return stripe.redirectToCheckout({ sessionId: session.session_id });
+                })
+                .then(result => {
+                    if (result.error) {
+                        alert(result.error.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        });
+    </script>
+</body>
+</html>

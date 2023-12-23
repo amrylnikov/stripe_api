@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Order Detail</title>
+    <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+    <a href="{% url 'items_show' %}">Товары</a>
+    <h1>Корзина</h1>
+    <ul>
+        {% for item in order.items.all %}
+            <li><a href="{% url 'item_detail' item.pk %}">{{ item.name }}</a> - ${{ item.price }}</li>
+        {% endfor %}
+    </ul>
+    <p> Итого: ${{ order.get_total_cost }}</p>
+    <p></p>
+    <p> Скидка: ${{ order.discount.amount }}</p>
+    <p> Налог: ${{ order.tax.amount }}</p>
+
+    <button id='buy-order'>Оплатить заказ</button>
+
+    <script>
+        var stripe = Stripe('{{ stripe_publishable_key }}');
+        var buyOrderButton = document.getElementById('buy-order');
+
+        buyOrderButton.addEventListener('click', function () {
+            fetch('{% url "buy_order" %}')
+                .then(response => response.json())
+                .then(session => {
+                    return stripe.redirectToCheckout({ sessionId: session.session_id });
+                })
+                .then(result => {
+                    if (result.error) {
+                        alert(result.error.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        });
+    </script>
+</body>
+</html>

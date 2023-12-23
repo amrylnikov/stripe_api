@@ -1,0 +1,24 @@
+<h1 class="my-4">Товары</h1>
+<a href="{% url 'order_detail' %}">Корзина</a>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Номер</th>
+      <th>Имя</th>
+      <th>Описание</th>
+      <th>Цена</th>
+    </tr>
+  </thead>
+  <tbody>    
+    {% for item in object_list %}
+    <tr>
+      <td>{{ item.pk }}</td>
+      <td>
+        <a href="{% url 'item_detail' item.pk %}">{{ item.name }}</a>
+      </td>
+      <td>{{ item.description }}</td>
+      <td>{{ item.price }}$</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
