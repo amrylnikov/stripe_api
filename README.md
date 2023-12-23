@@ -4,6 +4,16 @@
 
 Проект представляет собой простой сайт-магазин, при покупке товаров в котором происходит переход на сервис оплаты stripe.
 
+## Выполненные задачи
+
+· 	Django Модель Item с полями (name, description, price)
+· 	API с двумя методами: GET /buy/{id}, GET /item/{id}
+· 	Запуск используя Docker
+· 	Использование environment variables
+· 	Просмотр Django Моделей в Django Admin панели
+· 	Модель Order
+· 	Модели Discount
+
 ## Демонстрация
 
 ### Главная страница
@@ -23,3 +33,6 @@
 
 ### Панель администратора
 ![Demonstration](https://github.com/amrylnikov/stripe_api/blob/main/demonstration/6.PNG?raw=true)
+
+### Видео работы приложения
+https://www.youtube.com/watch?v=MzpebwZW_7s
