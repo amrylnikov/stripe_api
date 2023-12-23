@@ -7,11 +7,17 @@
 ## Выполненные задачи
 
 · 	Django Модель Item с полями (name, description, price)
+
 · 	API с двумя методами: GET /buy/{id}, GET /item/{id}
+
 · 	Запуск используя Docker
+
 · 	Использование environment variables
+
 · 	Просмотр Django Моделей в Django Admin панели
+
 · 	Модель Order
+
 · 	Модели Discount
 
 ## Демонстрация
