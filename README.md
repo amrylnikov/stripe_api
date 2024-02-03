@@ -44,7 +44,7 @@
 ### Видео работы приложения
 https://www.youtube.com/watch?v=MzpebwZW_7s
 
-## Setup
+## Запуск 
 
 - Используйте эту команду для настройки проекта:
 > pip install --upgrade poetry && poetry build && poetry install
